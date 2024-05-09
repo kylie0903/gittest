@@ -16,34 +16,33 @@ import NotiEdit from './page/notiEdit';
 function App() {
   const [notiData, setNotiData] = useState([]);
   const getDatas = ()=>{
-    async ()=>{
-      const res = await fetch('https://jsonplaceholder.typicode.com/comments')
-            .then((res)=>res.json())
-            const datas = res.slice(0,10).map((data)=>{
-              return{
-                 notiId : data.id,
-                 notiName :data.email,
-                 notiText : data.body
-              }
-            })
-            // console.log(datas)
-            setNotiData(datas)
-    }
-    // axios.get('https://jsonplaceholder.typicode.com/comments').then(
-    //   (res)=>{
-    //     const datas = res.data.slice(0,10).map((data)=>{
-    //                 return{
-    //                   notiTit : data.name,
-    //                    notiId : data.id,
-    //                    notiName :data.email,
-    //                    notiText : data.body
-    //                 }
-    //               })
-    //               setNotiData(datas)
-    //   }).catch((err)=>{console.log(err)})
+    axios.get('https://jsonplaceholder.typicode.com/comments').then(
+      (res)=>{
+        const datas = res.data.slice(0,10).map((data)=>{
+                    return{
+                      notiTit : data.name,
+                       notiId : data.id,
+                       notiName :data.email,
+                       notiText : data.body
+                    }
+                  })
+                  setNotiData(datas)
+      }).catch((err)=>{console.log(err)})
   }
   
-
+  // async ()=>{
+  //   const res = await fetch('https://jsonplaceholder.typicode.com/comments')
+  //         .then((res)=>res.json())
+  //         const datas = res.slice(0,10).map((data)=>{
+  //           return{
+  //              notiId : data.id,
+  //              notiName :data.email,
+  //              notiText : data.body
+  //           }
+  //         })
+  //         // console.log(datas)
+  //         setNotiData(datas)
+  // }
   useEffect(()=>{
     getDatas()
   },[])
